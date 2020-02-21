@@ -70,7 +70,7 @@ private:
   void exec();
 public:
   Scope_Guard()=default;
-  Scope_Guard(std::function<void()> _cb);
+  explicit Scope_Guard(std::function<void()> _cb);
   ~Scope_Guard();
   void trigger();
 };
