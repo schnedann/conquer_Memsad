@@ -8,7 +8,7 @@
 
 template<typename T, size_t N> class secubuff{
 private:
-  std::array<T,N> buff;
+  std::array<T,N> buff{};
   Core::Runtime::Scope_Guard sg;
 public:
   //Utilizing the Scopeguard guarantees execution even if code is disrupted by e.g. an exception
