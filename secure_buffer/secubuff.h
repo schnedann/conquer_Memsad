@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <array>
+#include <algorithm>
 
 #include "scope_guard.h"
 
@@ -13,9 +14,9 @@ private:
 public:
   //Utilizing the Scopeguard guarantees execution even if code is disrupted by e.g. an exception
   secubuff():sg([this](){
-    for(size_t ii=0; ii<N; ++ii){
-      this->buff[ii]='0';
-    }
+    std::for_each(this->buff.begin(), this->buff.end(), [](T& _x){
+      _x=T{};
+    });
   }){};
 
   ~secubuff()=default;
