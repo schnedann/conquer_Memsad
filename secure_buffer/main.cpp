@@ -5,25 +5,30 @@
 
 using namespace std;
 
-void test(char* key){
-  secubuff<char,100> sb;
+void test(char* const key){
+  char* ptr;
+  {
+    secubuff<char,100> sb;
 
-  for(size_t ii=0; ii<sb.size(); ++ii){
-    sb[ii] = char(65+(rand()%25));
+    for(size_t ii=0; ii<sb.size(); ++ii){
+      sb[ii] = char(65+(rand()%25));
+    }
+
+    ptr = sb.data();
+
+    memcpy(key,sb.data(),sb.size());
   }
 
-  memcpy(key,sb.data(),sb.size());
-
+  cout << string(ptr,100) << "\n";
   return;
 }
 
 
+int main(){
+  cout << "Hello Conquer MemSad!" << endl;
 
-int main()
-{
-  cout << "Hello World!" << endl;
+  array<char,100> key{}; //A buffer
 
-  array<char,100> key;
   test(key.data());
 
   cout << string(key.data(),key.size()) << "\n";
