@@ -6,10 +6,9 @@
 
 #include "scope_guard.h"
 
-template<typename T, size_t N> class secubuff
-{
+template<typename T, size_t N> class secubuff{
 private:
-  volatile T buff[N];
+  std::array<T,N> buff;
   Core::Runtime::Scope_Guard sg;
 public:
   //Utilizing the Scopeguard guarantees execution even if code is disrupted by e.g. an exception
@@ -21,7 +20,7 @@ public:
 
   ~secubuff()=default;
 
-  T volatile& operator[](std::size_t idx){
+  T& operator[](std::size_t idx){
     return buff[idx%N];
   }
   const T& operator[](std::size_t idx) const{
@@ -29,11 +28,11 @@ public:
   }
 
   T* data(){
-    return const_cast<T*>(buff);
+    return buff.data();
   }
 
   size_t size(){
-    return N;
+    return buff.size();
   }
 };
 
