@@ -26,3 +26,8 @@
 *.exe
 *.out
 *.app
+
+# Backup files
+*.autosave
+
+build-secure_buffer-Desktop-Debug/
