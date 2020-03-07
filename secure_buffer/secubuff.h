@@ -32,6 +32,10 @@ public:
     return buff.data();
   }
 
+  void overwrite(){
+    sg.trigger();
+  }
+
   size_t size(){
     return buff.size();
   }
